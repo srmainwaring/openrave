@@ -256,7 +256,9 @@ void toRapidJSONValue(const object &obj, rapidjson::Value &value, rapidjson::Doc
 #if PY_MAJOR_VERSION >= 3
     else if (PyUnicode_Check(obj.ptr()))
     {
-        value.SetString(PyUnicode_AsUTF8(obj.ptr()), PyUnicode_GET_SIZE(obj.ptr()), allocator);
+        Py_ssize_t size = 0;
+        const char* str = PyUnicode_AsUTF8AndSize(obj.ptr(), &size);
+        value.SetString(str, (int)size, allocator);
     }
 #else
     else if (PyString_Check(obj.ptr()))
@@ -3406,11 +3408,6 @@ OPENRAVE_PYTHON_MODULE(openravepy_int)
             py::object pyerrdata = ConvertStringToUnicode(e.what());
             pyerrdata.inc_ref(); // since passing to PyErr_SetObject
             PyErr_SetObject(PyExc_TypeError, pyerrdata.ptr() );
-        }
-        catch( const boost::filesystem::filesystem_error& e ) {
-            py::object pyerrdata = ConvertStringToUnicode(std::string(e.what())+" ("+e.path1().native()+")");
-            pyerrdata.inc_ref(); // since passing to PyErr_SetObject
-            PyErr_SetObject(PyExc_RuntimeError, pyerrdata.ptr() );
         }
         catch( const std::runtime_error& e ) {
             py::object pyerrdata = ConvertStringToUnicode(e.what());

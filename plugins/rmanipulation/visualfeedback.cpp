@@ -498,7 +498,7 @@ private:
                 int numIgnore = 0;
                 for(int icollision = 0; icollision < preport->nNumValidCollisions; ++icollision) {
                     const CollisionPairInfo& cpinfo = preport->vCollisionInfos[icollision];
-                    string_view bodyname, linkname;
+                    OpenRAVE::string_view bodyname, linkname;
                     if( !cpinfo.bodyLinkGeom1Name.empty() ) {
                         if( cpinfo.CompareFirstBodyName(_vf->_sensorrobot->GetName()) == 0 ) {
                             numIgnore++;

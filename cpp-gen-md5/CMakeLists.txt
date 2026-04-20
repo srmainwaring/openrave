@@ -9,6 +9,8 @@ add_executable(cpp-gen-md5-native cpp_lexer.cpp cpp_lexer_token.cpp md5.c cpp-ge
 set_target_properties(cpp-gen-md5-native PROPERTIES COMPILE_FLAGS "${NATIVE_COMPILE_FLAGS}")
 target_link_libraries(cpp-gen-md5-native openrave-md5-native)
 add_dependencies(cpp-gen-md5-native openrave-md5-native)
+target_include_directories(cpp-gen-md5-native PUBLIC "${OPENRAVE_BOOST_INCLUDE_DIRS}")
+target_compile_options(cpp-gen-md5-native PUBLIC -Wno-error -Wno-shadow)
 
 if( CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX )
   set_target_properties(cpp-gen-md5-native PROPERTIES COMPILE_FLAGS "-trigraphs -ftemplate-depth-500 ${NATIVE_COMPILE_FLAGS}")

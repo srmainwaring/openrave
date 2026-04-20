@@ -1607,7 +1607,7 @@ protected:
                             
                             // ik constraints the robot pretty well, so any self-collisions might mean the IK itself is impossible.
                             // check if self-colliding with non-moving part and a link that is pretty high in the chain, then perhaps we should give up...?
-                            string_view otherBodyName, otherLinkName;
+                            OpenRAVE::string_view otherBodyName, otherLinkName;
                             if( cpinfo.FindFirstMatchingLinkIndex(_vindependentlinks) >= 0 ) {
                                 cpinfo.ExtractSecondBodyLinkNames(otherBodyName, otherLinkName);
                             }
@@ -1636,8 +1636,8 @@ protected:
 
                             if( _vindependentlinks.size() != _vIndependentLinksIncludingFreeJoints.size() && _numBacktraceLinksForSelfCollisionWithFree > 0 ) {
                                 // check
-                                otherBodyName = string_view();
-                                otherLinkName = string_view();
+                                otherBodyName = OpenRAVE::string_view();
+                                otherLinkName = OpenRAVE::string_view();
                                 if( cpinfo.FindFirstMatchingLinkIndex(_vIndependentLinksIncludingFreeJoints) >= 0 ) {
                                     cpinfo.ExtractSecondBodyLinkNames(otherBodyName, otherLinkName);
                                 }
@@ -2056,7 +2056,7 @@ protected:
                             const CollisionPairInfo& cpinfo = ptempreport->vCollisionInfos[icollision];
                             // ik constraints the robot pretty well, so any self-collisions might mean the IK itself is impossible.
                             // check if self-colliding with non-moving part and a link that is pretty high in the chain, then perhaps we should give up...?
-                            string_view otherBodyName, otherLinkName;
+                            OpenRAVE::string_view otherBodyName, otherLinkName;
                             if( cpinfo.FindFirstMatchingLinkIndex(_vindependentlinks) >= 0 ) {
                                 cpinfo.ExtractSecondBodyLinkNames(otherBodyName, otherLinkName);
                             }
@@ -2085,8 +2085,8 @@ protected:
 
                             if( _vindependentlinks.size() != _vIndependentLinksIncludingFreeJoints.size() && _numBacktraceLinksForSelfCollisionWithFree > 0 ) {
                                 // check
-                                otherBodyName = string_view();
-                                otherLinkName = string_view();
+                                otherBodyName = OpenRAVE::string_view();
+                                otherLinkName = OpenRAVE::string_view();
                                 if( cpinfo.FindFirstMatchingLinkIndex(_vIndependentLinksIncludingFreeJoints) >= 0 ) {
                                     cpinfo.ExtractSecondBodyLinkNames(otherBodyName, otherLinkName);
                                 }

@@ -291,19 +291,19 @@ inline void LoadJsonValue(const rapidjson::Value& v, unsigned long long& t) {
     }
 }
 
-inline void LoadJsonValue(const rapidjson::Value& v, uint64_t& t) {
-    if (v.IsUint64()) {
-        t = v.GetUint64();
-    } else if (v.IsInt64()) {
-        t = v.GetInt64();
-    } else if (v.IsString()) {
-        t = boost::lexical_cast<uint64_t>(v.GetString());
-    } else if (v.IsBool()) {
-        t = v.GetBool() ? 1 : 0;
-    } else {
-        throw OPENRAVE_EXCEPTION_FORMAT("Cannot convert JSON type %s to UInt64", GetJsonString(v), OpenRAVE::ORE_InvalidArguments);
-    }
-}
+// inline void LoadJsonValue(const rapidjson::Value& v, uint64_t& t) {
+//     if (v.IsUint64()) {
+//         t = v.GetUint64();
+//     } else if (v.IsInt64()) {
+//         t = v.GetInt64();
+//     } else if (v.IsString()) {
+//         t = boost::lexical_cast<uint64_t>(v.GetString());
+//     } else if (v.IsBool()) {
+//         t = v.GetBool() ? 1 : 0;
+//     } else {
+//         throw OPENRAVE_EXCEPTION_FORMAT("Cannot convert JSON type %s to UInt64", GetJsonString(v), OpenRAVE::ORE_InvalidArguments);
+//     }
+// }
 
 inline void LoadJsonValue(const rapidjson::Value& v, int64_t& t) {
     if (v.IsInt64()) {
@@ -666,17 +666,17 @@ inline void SaveJsonValue(rapidjson::Value& v, long long t, rapidjson::Document:
     v.SetInt64(t);
 }
 
-inline void SaveJsonValue(rapidjson::Value& v, int64_t t, rapidjson::Document::AllocatorType& alloc) {
-    v.SetInt64(t);
-}
+// inline void SaveJsonValue(rapidjson::Value& v, int64_t t, rapidjson::Document::AllocatorType& alloc) {
+//     v.SetInt64(t);
+// }
 
 inline void SaveJsonValue(rapidjson::Value& v, unsigned long long t, rapidjson::Document::AllocatorType& alloc) {
     v.SetUint64(t);
 }
 
-inline void SaveJsonValue(rapidjson::Value& v, uint64_t t, rapidjson::Document::AllocatorType& alloc) {
-    v.SetUint64(t);
-}
+// inline void SaveJsonValue(rapidjson::Value& v, uint64_t t, rapidjson::Document::AllocatorType& alloc) {
+//     v.SetUint64(t);
+// }
 
 inline void SaveJsonValue(rapidjson::Value& v, bool t, rapidjson::Document::AllocatorType& alloc) {
     v.SetBool(t);

@@ -34,6 +34,9 @@ if( FCL_FOUND )
 
   if(FCL_MINOR_VERSION GREATER "4")
     string(REPLACE ";" " " FCL_LDFLAGS_STR "${FCL_LDFLAGS}")
+    message(STATUS "FCL_INCLUDE_DIRS: ${FCL_INCLUDE_DIRS}")
+    message(STATUS "FCL_LIBRARIES: ${FCL_LIBRARIES}")
+    message(STATUS "FCL_LIBRARY_DIRS: ${FCL_LIBRARY_DIRS}")
     set(CMAKE_REQUIRED_INCLUDES ${FCL_INCLUDE_DIRS} ${FCL_INCLUDEDIR})
     set(CMAKE_REQUIRED_FLAGS "${PLUGIN_COMPILE_FLAGS} ${FCL_CFLAGS_OTHER} -std=c++11 ${PLUGIN_LINK_FLAGS} ${FCL_LDFLAGS_STR}")
     set(CMAKE_REQUIRED_LIBRARIES fcl)
@@ -68,7 +71,6 @@ if( FCL_FOUND )
     endif()
 
     link_directories(${OPENRAVE_LINK_DIRS} ${FCL_LIBRARY_DIRS})
-    include_directories(${FCL_INCLUDE_DIRS} ${FCL_INCLUDEDIR})
 
     add_library(fclrave SHARED
         fclrave.cpp
@@ -81,6 +83,7 @@ if( FCL_FOUND )
         fclmanagercache.h
         plugindefs.h
     )
+    target_include_directories(fclrave PRIVATE ${FCL_INCLUDE_DIRS})
     target_link_libraries(fclrave PRIVATE boost_assertion_failed PUBLIC libopenrave ${FCL_LIBRARIES})
     # ${FCL_CFLAGS_OTHER} is useless as CMAKE_CXX_STANDARD now requires 14
     set_target_properties(fclrave PROPERTIES COMPILE_FLAGS "${PLUGIN_COMPILE_FLAGS}" LINK_FLAGS "${PLUGIN_LINK_FLAGS} ${FCL_LDFLAGS_STR}")

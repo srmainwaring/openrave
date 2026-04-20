@@ -61,7 +61,7 @@ void CacheTreeNode::SetCollisionInfo(RobotBase& robot, CollisionReportPtr& repor
     if( !!report && report->nNumValidCollisions > 0 ) {
         //_collidinglinktrans = report->plink1->GetTransform();
         const CollisionPairInfo& cpinfo = report->vCollisionInfos[0];
-        string_view bodyname, linkname;
+        OpenRAVE::string_view bodyname, linkname;
         if( cpinfo.CompareFirstBodyName(robot.GetName()) == 0 ) {
             cpinfo.ExtractFirstLinkName(linkname);
             _robotlinkindex = robot.GetLink(linkname)->GetIndex();

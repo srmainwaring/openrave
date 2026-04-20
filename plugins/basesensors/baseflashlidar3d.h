@@ -257,7 +257,7 @@ public:
                             // store the colliding bodies
                             for(int icollision = 0; icollision < _report->nNumValidCollisions; ++icollision) {
                                 const CollisionPairInfo& cpinfo = _report->vCollisionInfos[icollision];
-                                string_view bodyname;
+                                OpenRAVE::string_view bodyname;
                                 cpinfo.ExtractFirstBodyName(bodyname);
                                 if( bodyname.empty() ) {
                                     cpinfo.ExtractSecondBodyName(bodyname);

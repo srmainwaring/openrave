@@ -8,7 +8,10 @@ if( LIBXML2_INCLUDE_DIR )
   include_directories(${LIBXML2_INCLUDE_DIR})
 endif()
 
-include_directories(${MINIZIP_INCLUDE_DIR})
+include_directories(BEFORE ${MINIZIP_INCLUDE_DIR})
+message("MINIZIP_INCLUDE_DIR: ${MINIZIP_INCLUDE_DIR}")
+
+
 include_directories(BEFORE ${libpcrecpp_INCLUDE_DIRS})
 link_directories(${libpcrecpp_LIBRARY_DIRS})
 
@@ -20,7 +23,7 @@ file(GLOB libxmlplugin_files ${CMAKE_CURRENT_SOURCE_DIR}/src/modules/LIBXMLPlugi
 file(GLOB stddatabase_files ${CMAKE_CURRENT_SOURCE_DIR}/src/modules/STLDatabase/*.cpp)
 file(GLOB stderrplugin_files ${CMAKE_CURRENT_SOURCE_DIR}/src/modules/stdErrPlugin/*.cpp)
 
-set(COLLADA_LIBS minizip ${libpcrecpp_LIBRARIES} ${ZLIB_LIBRARIES})
+set(COLLADA_LIBS ${MINIZIP_LIBRARIES} ${libpcrecpp_LIBRARIES} ${ZLIB_LIBRARIES})
 set(COLLADA_LIBS ${COLLADA_LIBS} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
 
 add_library(collada15reader STATIC ${dom_files1_5} ${dae_files} ${libxmlplugin_files} ${stddatabase_files} ${stderrplugin_files})

@@ -22,6 +22,10 @@ endif()
 # Use, i.e. don't skip the full RPATH for the build tree
 set(CMAKE_SKIP_BUILD_RPATH  FALSE)
 
+# macOS: Global compile options
+add_compile_options(-Wno-error -Wno-shadow -Wno-overloaded-virtual)
+add_compile_definitions(BOOST_FILESYSTEM_NO_DEPRECATED)
+
 # When building, don't use the install RPATH already
 # (but later on when installing)
 set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
@@ -269,6 +273,9 @@ find_package(Boost REQUIRED COMPONENTS filesystem system thread iostreams)
 set(OPENRAVE_BOOST_INCLUDE_DIRS ${Boost_INCLUDE_DIRS})
 set(OPENRAVE_BOOST_LIB_DIRS ${Boost_LIBRARY_DIRS})
 
+message("Boost_INCLUDE_DIRS: ${Boost_INCLUDE_DIRS}")
+
+
 if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX OR COMPILER_IS_CLANG )
   set(NATIVE_COMPILE_FLAGS "" CACHE STRING "compilation flags to pass to tools that are executed at build-time. For example '-march=native -mtune=native'. By default this is empty.")
 else()
@@ -344,7 +351,7 @@ endif()
 find_package(MPFI)
 
 
-if( OPT_ACCURATEMATH AND NOT MSVC AND NOT ${CMAKE_SYSTEM_PROCESSOR} MATCHES aarch64 )
+if( OPT_ACCURATEMATH AND NOT MSVC AND NOT (${CMAKE_SYSTEM_PROCESSOR} MATCHES aarch64 OR ${CMAKE_SYSTEM_PROCESSOR} MATCHES arm64) )
   check_library_exists(crlibm crlibm_init "" CRLIBM_FOUND_LIB)
   check_include_file(crlibm.h HAVE_CRLIBM_H)
   if(NOT CRLIBM_FOUND_LIB OR NOT HAVE_CRLIBM_H)
@@ -395,7 +402,8 @@ else()
 endif()
 
 add_library(openrave-msgpack INTERFACE IMPORTED)
-find_package(msgpack-cxx 6.0.0)
+# find_package(msgpack-cxx 6.0.0)
+find_package(msgpack-cxx 7.0.0)
 if (NOT msgpack-cxx_FOUND)
   pkg_check_modules(msgpack msgpack)
   target_link_libraries(openrave-msgpack INTERFACE ${msgpack_LIBRARIES})
@@ -452,6 +460,8 @@ if( libpcrecpp_FOUND )
   set(CMAKE_REQUIRED_INCLUDES)
   if( NOT HAVE_PCRECPP_H )
     set(libpcrecpp_FOUND 0)
+  else()
+    link_directories(${libpcrecpp_LIBDIR})
   endif()
 endif()
 
@@ -491,10 +501,16 @@ if( OPT_COLLADA )
   pkg_check_modules(minizip minizip)
   if(minizip_FOUND)
     set(MINIZIP_INCLUDE_DIR ${minizip_INCLUDE_DIRS})
+    set(MINIZIP_LIBRARIES ${minizip_LIBRARIES})
+    link_directories(${minizip_LIBDIR})
   else()
     add_subdirectory(3rdparty/minizip)
     set(MINIZIP_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/minizip ${ZLIB_INCLUDE_DIR})
+    set(MINIZIP_LIBRARIES minizip)
   endif()
+  message("MINIZIP_INCLUDE_DIR: ${MINIZIP_INCLUDE_DIR}")
+  message("MINIZIP_LIBRARIES: ${MINIZIP_LIBRARIES}")
+
 
   if( COLLADA_DOM_FOUND )
     if( MSVC )

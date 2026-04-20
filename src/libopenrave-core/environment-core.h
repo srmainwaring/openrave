@@ -1196,7 +1196,7 @@ public:
         return KinBodyPtr();
     }
 
-    KinBodyPtr GetKinBody(const string_view name) const override
+    KinBodyPtr GetKinBody(const OpenRAVE::string_view name) const override
     {
         if (name.empty() ) {
             //RAVELOG_VERBOSE_FORMAT("env=%d, empty name is used to find body. Maybe caller has to be fixed.", GetId());
@@ -1252,14 +1252,14 @@ public:
         return KinBodyPtr();
     }
 
-    KinBodyPtr GetKinBodyById(const string_view id) const
+    KinBodyPtr GetKinBodyById(const OpenRAVE::string_view id) const override
     {
         if( id.empty() ) {
             return KinBodyPtr();
         }
 
         SharedLock lock942(_mutexInterfaces);
-        string_view testid = id;
+        OpenRAVE::string_view testid = id;
         const string_map<int>::const_iterator it = _mapBodyIdIndex.find(testid);
         if (it == _mapBodyIdIndex.end()) {
             RAVELOG_WARN_FORMAT("env=%s, id '%s' is not found", GetNameId()%id);
@@ -1359,7 +1359,7 @@ public:
     }
 
     /// assumes _mutexInterfaces is locked
-    inline int _FindBodyIndexByName(const string_view name) const
+    inline int _FindBodyIndexByName(const OpenRAVE::string_view name) const
     {
         if (name.empty() ) {
             return 0;
