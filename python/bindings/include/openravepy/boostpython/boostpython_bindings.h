@@ -2,6 +2,7 @@
 #ifndef OPENRAVE_BOOSTPYTHON_BINDINGS_H
 #define OPENRAVE_BOOSTPYTHON_BINDINGS_H
 
+#define _HAS_AUTO_PTR_ETC 0
 #include <boost/multi_array.hpp>
 
 #define OPENRAVEPY_API

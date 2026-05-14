@@ -24,7 +24,7 @@ set(CMAKE_SKIP_BUILD_RPATH  FALSE)
 
 # macOS: Global compile options
 add_compile_options(-Wno-error -Wno-shadow -Wno-overloaded-virtual)
-add_compile_definitions(BOOST_FILESYSTEM_NO_DEPRECATED)
+#add_compile_definitions(BOOST_FILESYSTEM_NO_DEPRECATED)
 
 # When building, don't use the install RPATH already
 # (but later on when installing)
@@ -402,8 +402,7 @@ else()
 endif()
 
 add_library(openrave-msgpack INTERFACE IMPORTED)
-# find_package(msgpack-cxx 6.0.0)
-find_package(msgpack-cxx 7.0.0)
+find_package(msgpack-cxx 6.0.0)
 if (NOT msgpack-cxx_FOUND)
   pkg_check_modules(msgpack msgpack)
   target_link_libraries(openrave-msgpack INTERFACE ${msgpack_LIBRARIES})
@@ -818,7 +817,8 @@ if (OPT_PYTHON3)
   find_package(pybind11 2.9.2) # 2.9.2 is the last version of pybind11 to support Python 2.
 
   if (pybind11_FOUND)
-    target_link_libraries(openravepy3_meta INTERFACE rt Python3::Module Python3::NumPy pybind11::module libopenrave libopenrave-core)
+    #target_link_libraries(openravepy3_meta INTERFACE rt Python3::Module Python3::NumPy pybind11::module libopenrave libopenrave-core)
+    target_link_libraries(openravepy3_meta INTERFACE Python3::Module Python3::NumPy pybind11::module libopenrave libopenrave-core)
     target_compile_options(openravepy3_meta INTERFACE "-fvisibility=hidden") # pybind11 requires less visibility
     target_compile_definitions(openravepy3_meta INTERFACE "OPENRAVE_CORE_DLL=1" "USE_PYBIND11_PYTHON_BINDINGS=1")
     set(USE_PYBIND11_PYTHON3_BINDINGS ON)

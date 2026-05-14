@@ -96,10 +96,11 @@ using OpenRAVE::ControllerBase;
 using OpenRAVE::AttributesList;
 
 
-#include <fcl/collision.h>
-#include <fcl/distance.h>
-#include <fcl/BVH/BVH_model.h>
-#include <fcl/broadphase/broadphase.h>
-#include <fcl/shape/geometric_shapes.h>
+#include <fcl/fcl.h>
+//#include <fcl/narrowphase/collision.h>
+//#include <fcl/narrowphase/distance.h>
+//#include <fcl/geometry/bvh/BVH_model.h>
+//#include <fcl/broadphase/broadphase.h>
+//#include <fcl/geometry/shape/geometric_shapes.h>
 
 #endif

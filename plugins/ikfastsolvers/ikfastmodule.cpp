@@ -14,6 +14,9 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "plugindefs.h"
+
+#include <filesystem>
+
 #include <boost/algorithm/string.hpp>
 #include <boost/bind/bind.hpp>
 #include <boost/lexical_cast.hpp>
@@ -484,7 +487,7 @@ public:
         std::string pluginext = PLUGIN_EXT;
         std::string ikfilenamefound; /// set to non-empty when ikfile was found
 
-        for (boost::filesystem::directory_iterator itr(kinematicsfullpath); itr!=boost::filesystem::directory_iterator(); ++itr) {
+        for (std::filesystem::directory_iterator itr(kinematicsfullpath); itr!=std::filesystem::directory_iterator(); ++itr) {
             std::string ikfilename = itr->path().filename().string();
             if( ikfilename.size() >= ikfilenameprefix.size() && ikfilename.substr(0, ikfilenameprefix.size()) == ikfilenameprefix ) {
                 if( ikfilename.size() >= pluginext.size() && ikfilename.compare(ikfilename.size() - pluginext.size(), pluginext.size(), pluginext) == 0 ) {

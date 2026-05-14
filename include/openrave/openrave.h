@@ -89,6 +89,7 @@ namespace std{
 #include <boost/static_assert.hpp>
 #include <boost/format.hpp>
 #include <boost/array.hpp>
+#define _HAS_AUTO_PTR_ETC 0
 #include <boost/multi_array.hpp>
 #include <boost/make_shared.hpp>
 //#include <boost/cstdint.hpp>

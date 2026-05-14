@@ -16,6 +16,7 @@
 #include <sstream>
 #include <boost/lexical_cast.hpp>
 
+#define _HAS_AUTO_PTR_ETC 0
 #include <boost/multi_array.hpp>
 #include <algorithm>
 
