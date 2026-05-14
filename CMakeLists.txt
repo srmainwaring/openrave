@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.0)
+cmake_minimum_required (VERSION 3.5)
 project(OpenRAVE)
 set( CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS TRUE )
 
@@ -269,7 +269,7 @@ else()
   set(OPENRAVE_LIBRARY_SUFFIX "${OPENRAVE_SOVERSION}" CACHE STRING "Suffix to append to library names")
 endif()
 
-find_package(Boost REQUIRED COMPONENTS filesystem system thread iostreams)
+find_package(Boost REQUIRED COMPONENTS filesystem thread iostreams)
 set(OPENRAVE_BOOST_INCLUDE_DIRS ${Boost_INCLUDE_DIRS})
 set(OPENRAVE_BOOST_LIB_DIRS ${Boost_LIBRARY_DIRS})
 
