@@ -14,8 +14,8 @@ if (OPT_PYTHON)
 endif()
 
 if (OPT_PYTHON3)
-    add_library(openravepy3_rampoptimizer SHARED openravepy_rampoptimizer.cpp)
-    target_link_libraries(openravepy3_rampoptimizer PRIVATE boost_assertion_failed PUBLIC rampoptimizer openravepy3_int openravepy3_meta)
+    add_library(openravepy3_rampoptimizer MODULE openravepy_rampoptimizer.cpp)
+    target_link_libraries(openravepy3_rampoptimizer PRIVATE boost_assertion_failed PUBLIC rampoptimizer openravepy3_meta)
     set_target_properties(openravepy3_rampoptimizer PROPERTIES
         PREFIX ""
         LIBRARY_OUTPUT_DIRECTORY "python3"

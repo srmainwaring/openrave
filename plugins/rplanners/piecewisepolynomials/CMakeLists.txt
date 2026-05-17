@@ -18,8 +18,8 @@ if (OPT_PYTHON)
 endif()
 
 if (OPT_PYTHON3)
-    add_library(openravepy3_piecewisepolynomials SHARED openravepy_piecewisepolynomials.cpp)
-    target_link_libraries(openravepy3_piecewisepolynomials PRIVATE boost_assertion_failed PUBLIC piecewisepolynomials openravepy3_int openravepy3_meta)
+    add_library(openravepy3_piecewisepolynomials MODULE openravepy_piecewisepolynomials.cpp)
+    target_link_libraries(openravepy3_piecewisepolynomials PRIVATE boost_assertion_failed PUBLIC piecewisepolynomials openravepy3_meta)
     set_target_properties(openravepy3_piecewisepolynomials PROPERTIES
         PREFIX ""
         LIBRARY_OUTPUT_DIRECTORY "python3"

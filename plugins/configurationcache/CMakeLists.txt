@@ -14,8 +14,8 @@ if (OPT_PYTHON)
 endif()
 
 if (OPT_PYTHON3)
-    add_library(openravepy3_configurationcache SHARED openravepy_configurationcache.cpp)
-    target_link_libraries(openravepy3_configurationcache PRIVATE boost_assertion_failed PUBLIC configurationcache openravepy3_int openravepy3_meta)
+    add_library(openravepy3_configurationcache MODULE openravepy_configurationcache.cpp)
+    target_link_libraries(openravepy3_configurationcache PRIVATE boost_assertion_failed PUBLIC configurationcache openravepy3_meta)
     set_target_properties(openravepy3_configurationcache PROPERTIES
         PREFIX ""
         LIBRARY_OUTPUT_DIRECTORY "python3"

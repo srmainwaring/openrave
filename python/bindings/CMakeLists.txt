@@ -71,7 +71,7 @@ if (OPT_PYTHON3)
     #message("OPENRAVEPY_COMPILE_FLAGS: ${OPENRAVEPY_COMPILE_FLAGS}")
 
     ## openrave bindings
-    add_library(openravepy3_int SHARED ${openravepy_int_cpp_files})
+    add_library(openravepy3_int MODULE ${openravepy_int_cpp_files})
     target_link_libraries(openravepy3_int PRIVATE boost_assertion_failed PUBLIC openravepy3_meta)
     target_compile_options(openravepy3_int PRIVATE "${OPENRAVEPY_COMPILE_FLAGS}")
     set_target_properties(openravepy3_int PROPERTIES
@@ -82,9 +82,8 @@ if (OPT_PYTHON3)
     install(TARGETS openravepy3_int EXPORT openrave-targets DESTINATION ${OPENRAVEPY3_VER_INSTALL_DIR})
 
     ## ann bindings
-    #if (ANN_FOUND)
-    if (FALSE)
-        add_library(py3ANN_int SHARED pyann.cpp bindings.cpp)
+    if (ANN_FOUND)
+        add_library(py3ANN_int MODULE pyann.cpp bindings.cpp)
         include_directories(${ANN_INCLUDE_DIR})
         target_link_libraries(py3ANN_int PRIVATE boost_assertion_failed ANN PUBLIC openravepy3_meta)
         target_compile_options(py3ANN_int PRIVATE "${ANN_CFLAGS} ${OPENRAVEPY_COMPILE_FLAGS}")
@@ -98,7 +97,7 @@ if (OPT_PYTHON3)
 
     ## convexdecomposition bindings
     if (CONVEXDECOMPOSITION_FOUND)
-        add_library(convexdecompositionpy3 SHARED convexdecompositionpy.cpp bindings.cpp)
+        add_library(convexdecompositionpy3 MODULE convexdecompositionpy.cpp bindings.cpp)
         include_directories(${CONVEXDECOMPOSITION_INCLUDE_DIR})
         target_link_libraries(convexdecompositionpy3 PRIVATE boost_assertion_failed convexdecomposition PUBLIC openravepy3_meta)
         target_compile_options(convexdecompositionpy3 PRIVATE "${CONVEXDECOMPOSITION_CFLAGS} ${OPENRAVEPY_COMPILE_FLAGS}")
