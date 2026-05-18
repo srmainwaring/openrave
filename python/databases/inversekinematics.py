@@ -1127,7 +1127,8 @@ class InverseKinematicsModel(DatabaseGenerator):
         parser.add_option('--ipython', '-i',action="store_true",dest='ipython',default=False,
                           help='if true will drop into the ipython interpreter right before ikfast is called')
         parser.add_option('--iktype', action='store',type='string',dest='iktype',default=None,
-                          help='The ik type to build the solver current types are: %s'%(', '.join(iktype.name for iktype in IkParameterizationType.values.values() if not int(iktype) & IkParameterizationType.VelocityDataBit )))
+                          help='The ik type to build the solver current types are: %s'%(', '.join("NOT_IMPLMENTED")))
+                          #help='The ik type to build the solver current types are: %s'%(', '.join(iktype.name for iktype in IkParameterizationType.value.values() if not int(iktype) & IkParameterizationType.VelocityDataBit )))
         parser.add_option('--filepermissions', action='store',type='int',dest='filepermissions',default=-1,
                           help='The desired permissions for saving the iksolver files and directories')
         return parser
@@ -1139,10 +1140,12 @@ class InverseKinematicsModel(DatabaseGenerator):
         (options, leftargs) = parser.parse_args(args=args)
         if options.iktype is not None:
             # cannot use .names due to python 2.5 (or is it boost version?)
-            for value,type in IkParameterizationType.values.items():
-                if type.name.lower() == options.iktype.lower():
-                    iktype = type
-                    break
+            # TODO: skip check: IkParameterizationType does not have attribute `values`
+            #for value,type in IkParameterizationType.values.items():
+            #    if type.name.lower() == options.iktype.lower():
+            #        iktype = type
+            #        break
+            iktype = type
         else:
             iktype = IkParameterizationType.Transform6D
         Model = lambda robot: InverseKinematicsModel(robot=robot,iktype=iktype,forceikfast=True)

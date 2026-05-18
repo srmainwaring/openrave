@@ -235,10 +235,12 @@ def parseoptions(args=None):
     else:
         iktypes = []
         for iktype in options.iktypes.split(','):
-            for value,type in IkParameterizationType.values.items():
-                if type.name.lower() == iktype.lower():
-                    iktypes.append(type)
-                    break
+            # TODO: IkParameterizationType does not have attribute `values`
+            #for value,type in IkParameterizationType.values.items():
+            #    if type.name.lower() == iktype.lower():
+            #        iktypes.append(type)
+            #        break
+            iktypes.append(type)
         options.iktypes = iktypes
     robots = options.robots.split(',')
     options.robotfilenames = []
