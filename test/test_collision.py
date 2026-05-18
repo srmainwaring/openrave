@@ -14,8 +14,12 @@
 from common_test_openrave import *
 
 class RunCollision(EnvironmentSetup):
-    def __init__(self,collisioncheckername):
+    #def __init__(self,collisioncheckername):
+    #    self.collisioncheckername = collisioncheckername
+    def setup_method(self, collisioncheckername):
         self.collisioncheckername = collisioncheckername
+        self.setup()
+
     def setup(self):
         EnvironmentSetup.setup(self)
         self.env.SetCollisionChecker(RaveCreateCollisionChecker(self.env,self.collisioncheckername))

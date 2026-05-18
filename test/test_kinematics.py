@@ -14,6 +14,9 @@
 from common_test_openrave import *
 
 class TestKinematics(EnvironmentSetup):
+    def setup_method(self):
+        super.setup()
+
     def test_bodybasic(self):
         self.log.info('check if the joint-link set-get functions are consistent along with jacobians')
         env=self.env

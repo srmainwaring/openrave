@@ -14,6 +14,9 @@
 from common_test_openrave import *
 
 class TestBinaryTrajectory(EnvironmentSetup):
+	def setup_method(self):
+		super().setup()
+
 	def test_binary_traj(self):
 		trajFile1 = """
 		<trajectory>

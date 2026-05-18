@@ -14,6 +14,8 @@
 from common_test_openrave import *
 
 class TestTrajectory(EnvironmentSetup):
+    def setup_method(self):
+        super.setup() 
 
     def test_merging(self):
         env = self.env
@@ -891,4 +893,3 @@ class TestTrajectory(EnvironmentSetup):
         duration = traj.GetDuration()
         planningutils.SegmentTrajectory(traj, startoffset, duration)
         assert( abs(traj.GetDuration() - (duration-startoffset)) <= g_epsilon )
-

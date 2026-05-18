@@ -14,8 +14,11 @@
 from common_test_openrave import *
 
 class RunPhysics(EnvironmentSetup):
-    def __init__(self,physicsenginename):
+    #def __init__(self,physicsenginename):
+    #    self.physicsenginename = physicsenginename
+    def setup_method(self, physicsenginename):
         self.physicsenginename = physicsenginename
+        self.setup()
     def setup(self):
         EnvironmentSetup.setup(self)
         self.env.SetPhysicsEngine(RaveCreatePhysicsEngine(self.env,self.physicsenginename))

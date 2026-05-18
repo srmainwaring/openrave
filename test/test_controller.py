@@ -14,8 +14,12 @@
 from common_test_openrave import *
 
 class RunController(EnvironmentSetup):
-    def __init__(self,controllername):
+    #def __init__(self,controllername):
+    #    self.controllername = controllername
+    def setup_method(self, controllername):
         self.controllername = controllername
+        self.setup()
+
     def setup(self):
         EnvironmentSetup.setup(self)
 

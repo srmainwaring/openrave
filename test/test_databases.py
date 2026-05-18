@@ -15,6 +15,9 @@ from common_test_openrave import *
 
 class TestDatabases(EnvironmentSetup):
 
+    def setup_method(self):
+        super.setup()
+
     @expected_failure  # newer sympy is not compatible with katana iksolver generation
     def test_ikmodulegeneration(self):
         env=self.env

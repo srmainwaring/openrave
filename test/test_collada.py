@@ -14,6 +14,9 @@
 from common_test_openrave import *
 
 class TestCOLLADA(EnvironmentSetup):
+    def setup_method(self):
+        super().setup()
+
     def test_collada_loading(self):
         self.log.info('test that collada import/export works for robots')
         env=self.env

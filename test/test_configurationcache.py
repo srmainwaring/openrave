@@ -15,6 +15,9 @@ from common_test_openrave import *
 from openravepy import openravepy_configurationcache
 
 class TestConfigurationCache(EnvironmentSetup):
+    def setup_method(self):
+        self.setup()
+
     def setup(self):
         EnvironmentSetup.setup(self)
     

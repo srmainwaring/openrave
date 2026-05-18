@@ -17,6 +17,9 @@ import shutil
 import threading
 
 class TestEnvironment(EnvironmentSetup):
+    def setup_method(self):
+        super.setup()
+
     def test_load(self):
         env=self.env
         self.LoadEnv('../src/models/WAM/wam0.iv')

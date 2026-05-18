@@ -14,7 +14,9 @@
 from common_test_openrave import *
 
 class RunRobot(EnvironmentSetup):
-    def __init__(self,collisioncheckername):
+    #def __init__(self,collisioncheckername):
+    #    self.collisioncheckername = collisioncheckername
+    def setup_method(self,collisioncheckername):
         self.collisioncheckername = collisioncheckername
     def setup(self):
         EnvironmentSetup.setup(self)

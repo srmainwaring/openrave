@@ -18,6 +18,9 @@ except ImportError:
     import pickle
 
 class TestIkSolver(EnvironmentSetup):
+    def setup_method(self):
+        super.setup()
+
     def test_customfilter(self):
         env=self.env
         self.LoadEnv('data/lab1.env.xml')
