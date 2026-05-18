@@ -23,8 +23,6 @@ from openravepy import ikfast
 from optparse import OptionParser
 
 import time, sys, logging, multiprocessing
-#from nose.plugins import multiprocess
-from noseplugins import multiprocess,xunitmultiprocess, capture, callableclass
 
 try:
     import cPickle as pickle

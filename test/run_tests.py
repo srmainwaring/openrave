@@ -14,16 +14,8 @@
 # limitations under the License.
 import sys, logging
 from optparse import OptionParser
-import nose
-from nose.plugins import failuredetail
-from noseplugins import capture, callableclass
 
-try:
-    from multiprocessing import cpu_count
-    from noseplugins import xunitmultiprocess, multiprocess
-    usemultiprocess = True
-except ImportError:
-    def cpu_count(): return 1
+def cpu_count(): return 1
 usemultiprocess = False 
     
 if __name__ == "__main__":
@@ -42,15 +34,16 @@ if __name__ == "__main__":
     (options, args) = parser.parse_args()
 
     numprocesses = options.numprocesses if options.numprocesses is not None else cpu_count()
-    if usemultiprocess:
-        print('using multiprocess')
-        multiprocess._instantiate_plugins = [capture.Capture, xunitmultiprocess.Xunitmp,failuredetail.FailureDetail,callableclass.CallableClass]
-        handler = logging.StreamHandler(sys.stderr)
-        handler.setFormatter(logging.Formatter('%(name)s %(asctime)s: %(levelname)s %(message)s'))
-        multiprocess.log.addHandler(handler)
-        multiprocess.log.setLevel(logging.DEBUG)
-    else:
-        print('multiprocess disabled')
+    #if usemultiprocess:
+    #    print('using multiprocess')
+    #    multiprocess._instantiate_plugins = [capture.Capture, xunitmultiprocess.Xunitmp,failuredetail.FailureDetail,callableclass.CallableClass]
+    #    handler = logging.StreamHandler(sys.stderr)
+    #    handler.setFormatter(logging.Formatter('%(name)s %(asctime)s: %(levelname)s %(message)s'))
+    #    multiprocess.log.addHandler(handler)
+    #    multiprocess.log.setLevel(logging.DEBUG)
+    #else:
+    #  print('multiprocess disabled')
+    print('multiprocess disabled')
     argv=['nosetests','-v','-d','--with-callableclass','-s']
     if options.os_only:
         argv.append('test_programs.py')
@@ -59,10 +52,10 @@ if __name__ == "__main__":
     if options.with_coverage:
         argv += ['--with-coverage', '--cover-package=openravepy','--cover-html']
 
-    plugins=[capture.Capture(),failuredetail.FailureDetail(),callableclass.CallableClass()]
-    if usemultiprocess:
-        plugins+=[multiprocess.MultiProcess(),xunitmultiprocess.Xunitmp()]
-        argv += ['--with-xunitmp','--xunit-file=results.xml','--processes=%d'%numprocesses,'--process-timeout=%f'%options.timeout,'--process-restartworker']
+    #plugins=[capture.Capture(),failuredetail.FailureDetail(),callableclass.CallableClass()]
+    #if usemultiprocess:
+    #    plugins+=[multiprocess.MultiProcess(),xunitmultiprocess.Xunitmp()]
+    #    argv += ['--with-xunitmp','--xunit-file=results.xml','--processes=%d'%numprocesses,'--process-timeout=%f'%options.timeout,'--process-restartworker']
         
     # from IPython import embed; embed()
-    prog=nose.core.TestProgram(argv=argv,plugins=plugins,exit=False)
+    #prog=nose.core.TestProgram(argv=argv,plugins=plugins,exit=False)

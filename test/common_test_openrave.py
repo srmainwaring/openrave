@@ -25,11 +25,10 @@ except ImportError:
     izip = zip
 
 import functools
-import nose
-from nose.tools import assert_raises
 import fnmatch
 import time
 import os
+import pytest
 try:
     import cPickle as pickle
 except ImportError:
@@ -139,7 +138,7 @@ def expected_failure(test):
         try:
             test(*args, **kwargs)
         except Exception:
-            raise nose.SkipTest
+            pytest.skip("Skipping test")
         else:
             # raise AssertionError('Failure expected')
             pass
